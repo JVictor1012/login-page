@@ -1,12 +1,20 @@
 import './App.css'
+import Navbar from './components/NavBar'
+import UserDashboard from './components/UserDashboard'
+import LoginCard from './components/loginCard'
 
 function App() {
 
   return (
-    <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+  <>
+    <Navbar/>
+    <UserDashboard/>
+  
+  </>
+
   )
 }
 
 export default App
+
+ 
