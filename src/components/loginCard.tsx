@@ -26,7 +26,7 @@ export const loginCard = () => {
           },
           body: JSON.stringify({ email, password })
           
-        });
+        })
   
         if (!response.ok) {
           throw new Error('Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.')
@@ -35,9 +35,13 @@ export const loginCard = () => {
         const data = await response.json()
         console.log(data)
 
+        const accessToken = data.tokens.access
+        localStorage.setItem('accessToken', accessToken)
+
         setEmail('')
         setPassword('')
-        setError('');
+        setError('')
+
       } catch (error: any) {
         console.error('Erro ao fazer login:', error.message);
         setError(error.message);
@@ -57,8 +61,7 @@ export const loginCard = () => {
                 type='text' 
                 className='shadow border rounded w-full py-3 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline'
                 value={email}
-                onChange={handleEmailChange}
-              />
+                onChange={handleEmailChange}/>
             </div>
   
             <div className='mb-6'>
@@ -67,8 +70,7 @@ export const loginCard = () => {
                 type='password' 
                 className='shadow border rounded w-full py-3 px-3 text-gray-700 bg-gray-200 leading-tight focus:outline-none focus:shadow-outline'
                 value={password}
-                onChange={handlePasswordChange}
-              />
+                onChange={handlePasswordChange}/>
             </div>
             
             {error && <p className="text-red-500">{error}</p>}
