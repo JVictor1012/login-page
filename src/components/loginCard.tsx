@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import B2BitLogo from '../assets/B2Bit Logo.png'
+import { Link } from 'react-router-dom';
+import APIService from '../services/APIService';
 
 export const loginCard = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [error, setError] = useState('')
+    const [error, setError] = useState<string | null>(null);
   
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value);
@@ -16,36 +18,17 @@ export const loginCard = () => {
   
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-  
+      
       try {
-        const response = await fetch('https://api.homologation.cliqdrive.com.br/auth/login/', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json;version=v1_web'
-          },
-          body: JSON.stringify({ email, password })
-          
-        })
-  
-        if (!response.ok) {
-          throw new Error('Erro ao fazer login. Por favor, verifique suas credenciais e tente novamente.')
-        }
-  
-        const data = await response.json()
-        console.log(data)
+        const response = await APIService.login(email, password)
+        console.log(response)
 
-        const accessToken = data.tokens.access
-        localStorage.setItem('accessToken', accessToken)
-
-        setEmail('')
-        setPassword('')
-        setError('')
-
-      } catch (error: any) {
-        console.error('Erro ao fazer login:', error.message);
-        setError(error.message);
+      } catch (error) {
+        console.error('Erro ao fazer login:', error);
+        setError('Ocorreu um erro ao fazer login. Por favor, tente novamente.');
       }
+      
+        
     }
 
   

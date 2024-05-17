@@ -1,15 +1,12 @@
+
 import './App.css'
-import Navbar from './components/NavBar'
-import UserDashboard from './components/UserDashboard'
-import LoginCard from './components/loginCard'
+import AppRoutes from './routes'
 
 function App() {
 
   return (
   <>
-    <Navbar/>
-    <LoginCard/>
-  
+    <AppRoutes/>
   </>
 
   )
