@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import B2BitLogo from '../assets/B2Bit Logo.png'
-import { Link } from 'react-router-dom';
 import APIService from '../services/APIService';
 
 export const loginCard = () => {
@@ -22,6 +21,10 @@ export const loginCard = () => {
       try {
         const response = await APIService.login(email, password)
         console.log(response)
+        if (response.status === 200) { // Verifica se o login foi bem-sucedido
+          // Redireciona para outra página após o login bem-sucedido
+          window.location.href = "/dashboard";
+        }
 
       } catch (error) {
         console.error('Erro ao fazer login:', error);

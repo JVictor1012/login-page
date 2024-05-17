@@ -8,14 +8,14 @@ const APIService = {
           if (tokens && tokens.access) {
             localStorage.setItem('accessToken', tokens.access)
           }
-          return `${response.status} ${response.statusText}`
+          return { status: response.status, statusText: response.statusText }
         } catch (error) {
           throw error
         }
       },
     
       // Exemplo de função para fazer um GET, lembre-se de incluir o token de autorização se necessário
-      fetchData: async () => {
+      getData: async () => {
         try {
           const response = await axiosClient.get('/profile')
           return response.data;
