@@ -1,49 +1,62 @@
-import React from 'react';
-import APIService from '../services/APIService';
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import APIService from '../services/APIService'
 
-class UserDashboard extends React.Component {
-  state = {
-    userData: {}
-  };
+const UserDashboard = () => {
+  const [userData, setUserData] = useState(null)
+  const navigate = useNavigate()
 
-  async componentDidMount() {
-    try {
+  useEffect(() => {
 
-      const userData = await APIService.getData();
+    const verificaSessao = async () => {
+      if (localStorage.getItem('accessToken')) {
 
-      this.setState({ userData });
-    } catch (error) {
-      console.error('Erro ao carregar dados do usuário:', error);
+        try {
+
+          const data = await APIService.getData()
+          setUserData(data)
+
+        } catch (error) {
+          console.error('Erro ao carregar dados do usuário:', error)
+          navigate('/')
+        }
+      } else {
+        navigate('/')
+      }
     }
-  }
 
-  render() {
-    const { userData } = this.state;
+    verificaSessao()
+  }, [navigate])
 
-    return (
-      <div className='grid place-items-center min-h-screen'>
-        <div className="max-w-sm rounded-3xl overflow-hidden shadow-2xl p-5" >
 
+  return (
+    <div className='grid place-items-center min-h-screen'>
+        <div className="max-w-sm rounded-3xl overflow-hidden shadow-2xl p-5 bg-white">
           {userData && (
             <div>
-              <div>
-                <img className="m-5" src={userData.avatar.low} alt="Perfil"/>
-              </div>
-              
-              <div className='mb-6 px-4'>
-                <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3' >Your Name</label>
-                <label className=' rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.name}</label>
+              <label className='flex justify-center text-gray-700 text-sm text-left font-bold'>Imagem de Perfil</label>
+              <div className='flex justify-center'>
+                <img className="m-5 rounded-3xl" src={userData.avatar.low} alt="Perfil" />
               </div>
               <div className='mb-6 px-4'>
-                <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3'>Your Email</label>
-                <label className=' rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.email}</label>
+                <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3 w-full'>
+                  Seu Nome
+                </label>
+                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.name}</div>
+              </div>
+              <div className='mb-6 px-4'>
+                <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3 w-full'>
+                  Seu Email
+                </label>
+                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.email}</div>
               </div>
             </div>
           )}
         </div>
+
+
       </div>
-    );
-  }
+  )
 }
 
 export default UserDashboard;

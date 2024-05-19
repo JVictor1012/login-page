@@ -1,23 +1,32 @@
 import B2BitLogo from '../assets/B2Bit Logo.png'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-export const Navbar = () => {
-    return (
-      <nav className="bg-blue-900 p-4 w-full" >
-        <div className="container w-full">
-          <div className="flex justify-between items-center">
-            <div className="text-white font-bold">
-                <img className="h-5 object-contain" src={B2BitLogo} alt="Logo"/>
-            </div>
-            <ul className="flex space-x-4">
-              <li><a href="#" className="text-white">Página Inicial</a></li>
-              <li><a href="#" className="text-white">Sobre</a></li>
-              <li><a href="#" className="text-white">Contato</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    )
+const Navbar = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const logout = () => {
+    localStorage.removeItem('accessToken')
+    navigate('/')
   }
-  
-  export default Navbar;
-  
+
+
+  const isDashboardPage = location.pathname === '/dashboard'
+
+  return (
+    <nav className="flex justify-between items-center p-4 bg-white text-azul">
+      <div className="flex items-center">
+        <img className="h-5 mr-4" src={B2BitLogo} alt="B2Bit Logo" />
+        {isDashboardPage && <Link to="/" className="text-right">Home</Link>}
+      </div>
+
+      {isDashboardPage && (
+        <button className="rounded text-white font-semibold bg-red-700 px-5 py-1 mb-3" onClick={logout}>
+          Sair
+        </button>
+      )}      
+  </nav>
+  )
+}
+
+export default Navbar;

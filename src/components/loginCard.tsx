@@ -21,23 +21,21 @@ export const loginCard = () => {
       try {
         const response = await APIService.login(email, password)
         console.log(response)
-        if (response.status === 200) { // Verifica se o login foi bem-sucedido
-          // Redireciona para outra página após o login bem-sucedido
+        if (response.status === 200) { 
           window.location.href = "/dashboard";
         }
 
       } catch (error) {
         console.error('Erro ao fazer login:', error);
-        setError('Ocorreu um erro ao fazer login. Por favor, tente novamente.');
+        setError('Erro ao fazer login. Por favor, verifique seu login e senha.');
       }
       
-        
     }
 
   
     return (
       <div className='grid place-items-center min-h-screen'>
-        <div className="max-w-sm rounded-3xl overflow-hidden shadow-2xl p-5">
+        <div className="max-w-sm rounded-3xl overflow-hidden shadow-2xl p-5 bg-white">
           <img className="w-100% m-5" src={B2BitLogo} alt="Logo" />
           
           <form onSubmit={handleSubmit}>
