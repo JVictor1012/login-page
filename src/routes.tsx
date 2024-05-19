@@ -8,7 +8,7 @@ export const AppRoutes = () =>{
         <Router>
             <Navbar/>
             <Routes>
-                <Route path="/" element={<LoginCard />}></Route>
+                <Route path="/login-page" element={<LoginCard />}></Route>
                 <Route path="/dashboard" element={<UserDashboard />}></Route>
 
             </Routes>
