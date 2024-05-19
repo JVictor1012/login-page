@@ -18,10 +18,10 @@ const UserDashboard = () => {
 
         } catch (error) {
           console.error('Erro ao carregar dados do usuário:', error)
-          navigate('/login-page')
+          navigate('/')
         }
       } else {
-        navigate('/login-page')
+        navigate('/')
       }
     }
 

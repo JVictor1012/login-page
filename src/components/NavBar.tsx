@@ -7,11 +7,11 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem('accessToken')
-    navigate('/login-page')
+    navigate('/')
   }
 
 
-  const isDashboardPage = location.pathname === '/login-page/dashboard'
+  const isDashboardPage = location.pathname === '/dashboard'
 
   return (
     <nav className="flex justify-between items-center p-4 bg-white text-azul">
