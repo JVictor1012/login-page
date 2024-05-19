@@ -36,19 +36,19 @@ const UserDashboard = () => {
             <div>
               <label className='flex justify-center text-gray-700 text-sm text-left font-bold'>Imagem de Perfil</label>
               <div className='flex justify-center'>
-                <img className="m-5 rounded-3xl" src={userData.avatar.low} alt="Perfil" />
+                <img className="m-5 rounded-3xl" src={userData['avatar']['low']} alt="Perfil" />
               </div>
               <div className='mb-6 px-4'>
                 <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3 w-full'>
                   Seu Nome
                 </label>
-                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.name}</div>
+                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData['name']}</div>
               </div>
               <div className='mb-6 px-4'>
                 <label className='flex gap-2 text-gray-700 text-sm text-left font-bold mb-2 py-3 w-full'>
                   Seu Email
                 </label>
-                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData.email}</div>
+                <div className='rounded w-full py-3 px-3 text-gray-700 bg-branco'>{userData["email"]}</div>
               </div>
             </div>
           )}
