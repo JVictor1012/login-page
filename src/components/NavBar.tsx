@@ -11,7 +11,7 @@ const Navbar = () => {
   }
 
 
-  const isDashboardPage = location.pathname === '/login-page/dashboard'
+  const isDashboardPage = location.pathname === '/login-page/#/dashboard'
 
   return (
     <nav className="flex justify-between items-center p-4 bg-white text-azul">
