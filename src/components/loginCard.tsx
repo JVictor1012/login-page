@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import B2BitLogo from '../assets/B2Bit Logo.png'
 import APIService from '../services/APIService';
+import { useNavigate } from 'react-router-dom'
 
 export const loginCard = () => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate()
   
     const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       setEmail(event.target.value);
@@ -22,7 +24,7 @@ export const loginCard = () => {
         const response = await APIService.login(email, password)
         console.log(response)
         if (response.status === 200) { 
-          window.location.href = "/dashboard";
+          navigate("/dashboard")
         }
 
       } catch (error) {
