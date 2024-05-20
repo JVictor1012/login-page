@@ -22,7 +22,7 @@ export const loginCard = () => {
         const response = await APIService.login(email, password)
         console.log(response)
         if (response.status === 200) { 
-          window.location.href = "/login-page/#/dashboard";
+          window.location.href = "/login-page/dashboard";
         }
 
       } catch (error) {

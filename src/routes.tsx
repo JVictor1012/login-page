@@ -1,17 +1,17 @@
 import LoginCard from './components/loginCard'
-import Navbar from './components/NavBar';
-import UserDashboard from "./components/UserDashboard";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import Navbar from './components/NavBar'
+import UserDashboard from "./components/UserDashboard"
+import { Routes, Route, BrowserRouter } from "react-router-dom"
 
 export const AppRoutes = () =>{
     return(
-        <HashRouter>
+        <BrowserRouter basename='/login-page'>
             <Navbar/>
             <Routes>
                 <Route path="/" element={<LoginCard />}></Route>
-                <Route path="/login-page/#/dashboard" element={<UserDashboard />}></Route>
+                <Route path="/dashboard" element={<UserDashboard />}></Route>
             </Routes>
-        </HashRouter>
+        </BrowserRouter>
     )
 }
 
